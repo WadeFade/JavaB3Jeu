@@ -12,12 +12,8 @@
     }</script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
 </head>
-<body class="bg-black text-gray-50">
-<div class="w-screen h-screen">
-    <div class="w-full h-full flex justify-center items-center">
-        <h1>Bienvenue sur l'accueil du Jeu</h1>
-    </div>
-</div>
+<body class="bg-black text-gray-50 ">
+
 
 <script src="<%= request.getContextPath()%>/js/index.js"></script>
 
