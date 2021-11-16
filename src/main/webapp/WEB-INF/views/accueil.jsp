@@ -12,8 +12,7 @@
     }</script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
 </head>
-<body class="bg-black text-gray-50 ">
-
+<body class="text-gray-50">
 
 <script src="<%= request.getContextPath()%>/js/index.js"></script>
 
