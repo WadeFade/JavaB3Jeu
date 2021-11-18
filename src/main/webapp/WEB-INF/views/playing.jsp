@@ -50,21 +50,19 @@
 <div class="absolute h-screen w-screen">
     <div class="h-full w-full flex flex-col justify-center items-center align-center">
         <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
-            <div class="flex justify-center items-center">
-                <div class="flex flex-col justify-center items-center">
-                    <a href="/JavaB3Jeu/playing-menu"
-                       class="w-40 h-40 flex justify-center items-center bg-black bg-opacity-30 border border-black border-opacity-60 rounded-full shadow-2xl">
-                        <img src="<%= request.getContextPath()%>/assets/svg/think.svg" alt="calc"
-                             class="w-24 h-24">
-                    </a>
-                    <h2 class="text-3xl mt-4 text-gray-50">Jouer !</h2>
-                </div>
-                <div class="flex flex-col justify-center items-center ml-8">
-                    <a href="/JavaB3Jeu/rank"
-                       class="w-40 h-40 flex justify-center items-center bg-black bg-opacity-30 border border-black border-opacity-60 rounded-full shadow-2xl ">
-                        <img src="<%= request.getContextPath()%>/assets/svg/ranking.svg" alt="Rank" class="w-24 h-24">
-                    </a>
-                    <h2 class="text-3xl mt-4 text-gray-50">Classement !</h2>
+            <h2 class="text-blue-300 font-bold text-6xl py-14">5 + 8 - 6 * 2</h2>
+            <div class="flex flex-col my-10 relative">
+                <label for="response" class="text-xs uppercase">Reponse</label>
+                <div class="flex flex-row">
+                    <input name="response" placeholder="..."
+                           type="number" id="response"
+                           class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
+                    <div class="flex justify-center items-center ml-8">
+                        <button>
+                            <img src="<%= request.getContextPath()%>/assets/svg/send.svg" alt="Chrono logo"
+                                 class="w-20 h-20">
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -73,6 +71,26 @@
 <div class="h-full w-full flex flex-col justify-center items-center align-center relative">
     <div class="flex flex-col-reverse lg:flex-row justify-center items-center mt-20">
         <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
+    </div>
+    <div class="relative pt-1 w-96">
+        <div class="flex mb-2 items-center justify-between">
+            <div>
+      <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-green-200">
+        evaluation En cours
+      </span>
+            </div>
+            <div class="text-right">
+      <span class="text-xs font-semibold inline-block text-green-600">
+          <%--            todo change the value of the progress bar --%>
+        10%
+      </span>
+            </div>
+        </div>
+        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
+            <%--            todo change the value of the progress bar --%>
+            <div style="width:10%"
+                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+        </div>
     </div>
 </div>
 

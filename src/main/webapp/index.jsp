@@ -42,7 +42,7 @@
 
 <div class="h-full w-full flex flex-col justify-center items-center align-center relative">
     <div class="flex flex-col-reverse lg:flex-row justify-center items-center mt-20">
-        <h2 class="text-5xl lg:text-4xl lg:p-10">Polish Brain'z</h2>
+        <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
     </div>
 
     <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
@@ -52,7 +52,7 @@
                 <input name="email" placeholder="..."
                        oninput="this.value = this.value.toLowerCase()"
                        type="email" id="email"
-                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
+                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
                 <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * L'email saisie n'est pas valide
                 </span>
@@ -61,7 +61,7 @@
                 <label for="password" class="text-xs">Mot de passe</label>
                 <input name="password" placeholder="*************"
                        type="password" id="password"
-                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
+                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
                 <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * Erreur
                 </span>

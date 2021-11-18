@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
 </head>
 
-<body class="bg-gray-900 text-gray-50">
+<body class="bg-gray-900 text-gray-50 relative">
 <div class="firefly"></div>
 <div class="firefly"></div>
 <div class="firefly"></div>
@@ -41,40 +41,21 @@
     </div>
 </div>
 
-<div class="h-full w-full flex flex-col justify-center items-center align-center">
+<div class="h-full w-full flex flex-col justify-center items-center align-center relative">
     <div class="flex flex-col-reverse lg:flex-row justify-center items-center mt-20">
         <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
     </div>
+
     <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
         <fieldset>
             <div class="flex flex-col my-10 relative">
-                <label for="firstname" class="text-xs">Prenom</label>
-                <input name="firstname" placeholder="..."
+                <label for="email" class="text-xs">Email</label>
+                <input name="email" placeholder="..."
                        oninput="this.value = this.value.toLowerCase()"
-                       type="text" id="firstname"
+                       type="email" id="email"
                        class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
                 <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Le prenom saisi n'est pas valide
-                </span>
-            </div>
-            <div class="flex flex-col my-10 relative">
-                <label for="lastname" class="text-xs">Nom</label>
-                <input name="lastname" placeholder="..."
-                       oninput="this.value = this.value.toLowerCase()"
-                       type="text" id="lastname"
-                       class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Le nom saisi n'est pas valide
-                </span>
-            </div>
-            <div class="flex flex-col my-10 relative">
-                <label for="pseudo" class="text-xs">Pseudo</label>
-                <input name="pseudo" placeholder="..."
-                       oninput="this.value = this.value.toLowerCase()"
-                       type="text" id="pseudo"
-                       class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Le pseudo saisi n'est pas valide
+                    * L'email saisie n'est pas valide
                 </span>
             </div>
             <div class="flex flex-col my-10 relative">
@@ -89,15 +70,16 @@
         </fieldset>
         <div class="form-buttons w-full flex justify-between flex-row-reverse">
             <button class="bg-blue-300 px-10 py-5 rounded-lg text-gray-800 text-sm">
-                S'inscrire
+                Se connecter
             </button>
             <a type="button" class="border border-blue-300 px-10 py-5 rounded-lg text-blue-300 text-sm"
-               href="/JavaB3Jeu/login">
-                Se connecter
+               href="/JavaB3Jeu/register">
+                S'inscrire
             </a>
         </div>
     </form>
 </div>
+
 
 <script src="<%= request.getContextPath()%>/js/index.js"></script>
 

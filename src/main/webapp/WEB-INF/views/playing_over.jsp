@@ -52,12 +52,12 @@
         <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
             <div class="flex justify-center items-center">
                 <div class="flex flex-col justify-center items-center">
-                    <a href="/JavaB3Jeu/playing-menu"
+                    <a href="/JavaB3Jeu/playing"
                        class="w-40 h-40 flex justify-center items-center bg-black bg-opacity-30 border border-black border-opacity-60 rounded-full shadow-2xl">
-                        <img src="<%= request.getContextPath()%>/assets/svg/think.svg" alt="calc"
+                        <img src="<%= request.getContextPath()%>/assets/svg/synchronize.svg" alt="Replay"
                              class="w-24 h-24">
                     </a>
-                    <h2 class="text-3xl mt-4 text-gray-50">Jouer !</h2>
+                    <h2 class="text-3xl mt-4 text-gray-50">Rejouer !</h2>
                 </div>
                 <div class="flex flex-col justify-center items-center ml-8">
                     <a href="/JavaB3Jeu/rank"
@@ -73,6 +73,26 @@
 <div class="h-full w-full flex flex-col justify-center items-center align-center relative">
     <div class="flex flex-col-reverse lg:flex-row justify-center items-center mt-20">
         <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
+    </div>
+    <div class="relative pt-1 w-96">
+        <div class="flex mb-2 items-center justify-between">
+            <div>
+      <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-green-200">
+        evaluation terminee
+      </span>
+            </div>
+            <div class="text-right">
+      <span class="text-xs font-semibold inline-block text-green-600">
+          <%--            todo change the value of the progress bar --%>
+        100%
+      </span>
+            </div>
+        </div>
+        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
+            <%--            todo change the value of the progress bar --%>
+            <div style="width:100%"
+                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+        </div>
     </div>
 </div>
 
