@@ -33,50 +33,55 @@
 <div class="firefly"></div>
 <div class="firefly"></div>
 <div class="firefly"></div>
-<div class="overflow-hidden absolute h-screen w-screen pointer-events-none">
+<div class="overflow-hidden absolute h-screen w-screen">
     <div class="w-full h-full relative">
-        <img src="<%= request.getContextPath()%>/assets/svg/mental-health.svg" alt="Head"
-             class="w-96 h-96 absolute -bottom-20 -right-20 transform -rotate-12 opacity-10">
+        <img src="<%= request.getContextPath()%>/assets/svg/think.svg" alt="Thinking"
+             class="w-96 h-96 absolute -bottom-20 -right-20 transform -rotate-12 opacity-10 pointer-events-none">
+        <a href="/JavaB3Jeu/accueil" class="absolute top-0 left-0 flex justify-center items-center w-20 h-20 p-4 z-50">
+            <img src="<%= request.getContextPath()%>/assets/svg/home.svg" alt="accueil"
+                 class="w-8 h-8">
+        </a>
+        <a href="/JavaB3Jeu/infos" class="absolute top-0 right-0 flex justify-center items-center w-20 h-20 p-4 z-50">
+            <img src="<%= request.getContextPath()%>/assets/svg/info.svg" alt="info"
+                 class="w-8 h-8">
+        </a>
     </div>
 </div>
-
+<div class="absolute h-screen w-screen">
+    <div class="h-full w-full flex flex-col justify-center items-center align-center">
+        <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
+            <a href="/JavaB3Jeu/playing"
+               class="w-40 h-40 flex justify-center items-center bg-black bg-opacity-30 border border-black border-opacity-60 rounded-full shadow-2xl">
+                <img src="<%= request.getContextPath()%>/assets/svg/stopwatch.svg" alt="Chrono logo" class="w-24 h-24">
+            </a>
+            <h2 class="text-3xl mt-4 text-gray-50">Go !</h2>
+        </form>
+    </div>
+</div>
 <div class="h-full w-full flex flex-col justify-center items-center align-center relative">
     <div class="flex flex-col-reverse lg:flex-row justify-center items-center mt-20">
-        <h2 class="text-5xl lg:text-4xl lg:p-10">Polish Brain'z</h2>
+        <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
     </div>
-
-    <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
-        <fieldset>
-            <div class="flex flex-col my-10 relative">
-                <label for="email" class="text-xs">Email</label>
-                <input name="email" placeholder="..."
-                       oninput="this.value = this.value.toLowerCase()"
-                       type="email" id="email"
-                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * L'email saisie n'est pas valide
-                </span>
+    <div class="relative pt-1 w-96">
+        <div class="flex mb-2 items-center justify-between">
+            <div>
+      <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-green-200">
+        evaluation en attente
+      </span>
             </div>
-            <div class="flex flex-col my-10 relative">
-                <label for="password" class="text-xs">Mot de passe</label>
-                <input name="password" placeholder="*************"
-                       type="password" id="password"
-                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Erreur
-                </span>
+            <div class="text-right">
+      <span class="text-xs font-semibold inline-block text-green-600">
+          <%--            todo change the value of the progress bar --%>
+        0%
+      </span>
             </div>
-        </fieldset>
-        <div class="form-buttons w-full flex justify-between flex-row-reverse">
-            <button class="bg-blue-300 px-10 py-5 rounded-lg text-gray-800 text-sm">
-                Se connecter
-            </button>
-            <a type="button" class="border border-blue-300 px-10 py-5 rounded-lg text-blue-300 text-sm"
-               href="/JavaB3Jeu/register">
-                S'inscrire
-            </a>
         </div>
-    </form>
+        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
+            <%--            todo change the value of the progress bar --%>
+            <div style="width:0"
+                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+        </div>
+    </div>
 </div>
 
 <script src="<%= request.getContextPath()%>/js/index.js"></script>

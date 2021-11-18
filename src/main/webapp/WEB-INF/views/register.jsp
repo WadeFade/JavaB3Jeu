@@ -43,7 +43,7 @@
 
 <div class="h-full w-full flex flex-col justify-center items-center align-center">
     <div class="flex flex-col-reverse lg:flex-row justify-center items-center mt-20">
-        <h2 class="text-5xl lg:text-4xl lg:p-10">Polish Brain'z</h2>
+        <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
     </div>
     <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
         <fieldset>
@@ -52,7 +52,7 @@
                 <input name="firstname" placeholder="..."
                        oninput="this.value = this.value.toLowerCase()"
                        type="text" id="firstname"
-                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
+                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
                 <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * Le prenom saisi n'est pas valide
                 </span>
@@ -62,7 +62,7 @@
                 <input name="lastname" placeholder="..."
                        oninput="this.value = this.value.toLowerCase()"
                        type="text" id="lastname"
-                       class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
+                       class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
                 <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * Le nom saisi n'est pas valide
                 </span>
@@ -72,7 +72,7 @@
                 <input name="pseudo" placeholder="..."
                        oninput="this.value = this.value.toLowerCase()"
                        type="text" id="pseudo"
-                       class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
+                       class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
                 <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * Le pseudo saisi n'est pas valide
                 </span>
@@ -81,7 +81,7 @@
                 <label for="password" class="text-xs">Mot de passe</label>
                 <input name="password" placeholder="*************"
                        type="password" id="password"
-                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2">
+                       class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
                 <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * Erreur
                 </span>
@@ -92,7 +92,7 @@
                 S'inscrire
             </button>
             <a type="button" class="border border-blue-300 px-10 py-5 rounded-lg text-blue-300 text-sm"
-               href="/JavaB3Jeu/">
+               href="/JavaB3Jeu/login">
                 Se connecter
             </a>
         </div>

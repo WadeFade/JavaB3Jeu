@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/playing-menu")
-public class PlayingMenuController extends HttpServlet {
+@WebServlet(urlPatterns = "/playing-over")
+public class PlayingOverController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/playing_menu.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/playing_over.jsp").forward(req, resp);
     }
 }
