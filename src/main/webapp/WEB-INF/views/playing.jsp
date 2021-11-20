@@ -50,7 +50,7 @@
 <div class="absolute h-screen w-screen">
     <div class="h-full w-full flex flex-col justify-center items-center align-center">
         <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
-            <h2 class="text-blue-300 font-bold text-6xl py-14">5 + 8 - 6 * 2</h2>
+            <h2 class="text-blue-300 font-bold text-6xl py-14"><%= request.getAttribute("expression") %></h2>
             <div class="flex flex-col my-10 relative">
                 <label for="response" class="text-xs uppercase">Reponse</label>
                 <div class="flex flex-row">
