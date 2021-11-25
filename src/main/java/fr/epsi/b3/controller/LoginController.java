@@ -1,5 +1,8 @@
 package fr.epsi.b3.controller;
 
+import fr.epsi.b3.bdd.DataSourcePgSQL;
+import fr.epsi.b3.bdd.users.CrudUsers;
+
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,5 +20,8 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+        DataSourcePgSQL.initializationConnection(this.dataSource);
+
+        CrudUsers crudUsers = new CrudUsers();
     }
 }

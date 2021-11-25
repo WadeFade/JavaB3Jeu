@@ -8,6 +8,10 @@ public class User {
     private Integer score;
     private String password;
 
+    public User() {
+
+    }
+
     @Override
     public String toString() {
         return "User{" +
