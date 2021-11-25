@@ -33,6 +33,7 @@
 <div class="firefly"></div>
 <div class="firefly"></div>
 <div class="firefly"></div>
+
 <div class="overflow-hidden absolute h-screen w-screen">
     <div class="w-full h-full relative">
         <img src="<%= request.getContextPath()%>/assets/svg/think.svg" alt="Thinking"
@@ -94,7 +95,15 @@
                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
         </div>
     </div>
+    Resultat = <%= request.getAttribute("note") %>/10 !
 </div>
+
+
+<div class="flex ">
+
+</div>
+
+
 
 <script src="<%= request.getContextPath()%>/js/index.js"></script>
 
