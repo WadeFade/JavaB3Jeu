@@ -1,5 +1,7 @@
 package fr.epsi.b3.model;
 
+import java.util.Comparator;
+
 public class User {
     private Integer id;
     private String pseudo;

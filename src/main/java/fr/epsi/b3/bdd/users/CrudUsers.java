@@ -2,11 +2,12 @@ package fr.epsi.b3.bdd.users;
 
 import fr.epsi.b3.bdd.DataSourcePgSQL;
 import fr.epsi.b3.model.User;
-import org.apache.commons.lang3.SerializationUtils;
+import fr.epsi.b3.model.UserScoreComparator;
 
 import javax.servlet.http.HttpServlet;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CrudUsers extends HttpServlet {
@@ -14,6 +15,10 @@ public class CrudUsers extends HttpServlet {
     private List<User> users;
 
     public CrudUsers() {
+        this.setDataCrudUsers();
+    }
+
+    public void setDataCrudUsers(){
         this.users = new ArrayList<>();
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
@@ -127,6 +132,12 @@ public class CrudUsers extends HttpServlet {
             }
         }
         return new User();
+    }
+
+    public void getRanking(){
+        this.setDataCrudUsers();
+        this.users = new ArrayList<>();
+        Collections.sort(this.users,new UserScoreComparator());
     }
 
     public List<User> getUsers() {
