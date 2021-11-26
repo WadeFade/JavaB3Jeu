@@ -13,6 +13,7 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
+    <script src="<%= request.getContextPath()%>/js/index.js" defer></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
 </head>
@@ -75,8 +76,6 @@
         <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
     </div>
 </div>
-
-<script src="<%= request.getContextPath()%>/js/index.js"></script>
 
 </body>
 </html>

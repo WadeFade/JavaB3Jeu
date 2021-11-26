@@ -13,6 +13,7 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
+    <script src="<%= request.getContextPath()%>/js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
 </head>
@@ -77,7 +78,7 @@
         <div class="flex mb-2 items-center justify-between">
             <div>
       <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-green-200">
-        evaluation En cours
+        evaluation en cours
       </span>
             </div>
             <div class="text-right">
@@ -94,8 +95,5 @@
         </div>
     </div>
 </div>
-
-<script src="<%= request.getContextPath()%>/js/index.js"></script>
-
 </body>
 </html>

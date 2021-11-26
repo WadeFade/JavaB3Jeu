@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polish Brain'z App !</title>
-    <meta name="description" content="L'application pour vous entrainer au calcul mental !">
-    <link rel="icon" type="image/png" href="<%= request.getContextPath()%>/assets/favicon/favicon-16x16.png">
+    <meta name="description" content="L'application pour vous entrainer au calcul mental !"/>
+    <link rel="icon" type="image/png" href="<%= request.getContextPath()%>/assets/favicon/favicon-16x16.png"/>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://use.typekit.net/ksz8gnz.js"></script>
@@ -13,8 +13,12 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" defer></script>
+    <script src="<%= request.getContextPath()%>/js/index.js" defer></script>
+    <script src="<%= request.getContextPath()%>/js/errors.js" defer></script>
+    <script src="<%= request.getContextPath()%>/js/error_auth.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css">
 </head>
 
 <body class="bg-gray-900 text-gray-50 relative">
@@ -54,7 +58,7 @@
                        oninput="this.value = this.value.toLowerCase()"
                        type="email" id="email"
                        class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
+                <span id="error_email" class="hidden mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * L'email saisie n'est pas valide
                 </span>
             </div>
@@ -63,8 +67,8 @@
                 <input name="password" placeholder="*************"
                        type="password" id="password"
                        class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Erreur
+                <span id="error_password" class="hidden mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
+                    * Le mot de passe saisi n'est pas valide
                 </span>
             </div>
         </fieldset>
@@ -79,9 +83,5 @@
         </div>
     </form>
 </div>
-
-
-<script src="<%= request.getContextPath()%>/js/index.js"></script>
-
 </body>
 </html>

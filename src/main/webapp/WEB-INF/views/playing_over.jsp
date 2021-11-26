@@ -13,6 +13,7 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
+    <script src="<%= request.getContextPath()%>/js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
 </head>
@@ -102,10 +103,5 @@
 <div class="flex ">
 
 </div>
-
-
-
-<script src="<%= request.getContextPath()%>/js/index.js"></script>
-
 </body>
 </html>

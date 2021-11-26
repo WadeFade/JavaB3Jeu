@@ -13,6 +13,10 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
+    <script src="<%= request.getContextPath()%>/js/index.js"></script>
+    <script src="<%= request.getContextPath()%>/js/errors.js" defer></script>
+    <script src="<%= request.getContextPath()%>/js/error_auth.js" defer></script>
+    <script src="<%= request.getContextPath()%>/js/error_register.js" defer></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
 </head>
@@ -48,23 +52,13 @@
     <form class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
         <fieldset>
             <div class="flex flex-col my-10 relative">
-                <label for="firstname" class="text-xs">Prenom</label>
-                <input name="firstname" placeholder="..."
+                <label for="email" class="text-xs">Email</label>
+                <input name="email" placeholder="..."
                        oninput="this.value = this.value.toLowerCase()"
-                       type="text" id="firstname"
+                       type="email" id="email"
                        class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Le prenom saisi n'est pas valide
-                </span>
-            </div>
-            <div class="flex flex-col my-10 relative">
-                <label for="lastname" class="text-xs">Nom</label>
-                <input name="lastname" placeholder="..."
-                       oninput="this.value = this.value.toLowerCase()"
-                       type="text" id="lastname"
-                       class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Le nom saisi n'est pas valide
+                <span id="error_email" class="hidden mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
+                    * L'email saisie n'est pas valide
                 </span>
             </div>
             <div class="flex flex-col my-10 relative">
@@ -73,7 +67,7 @@
                        oninput="this.value = this.value.toLowerCase()"
                        type="text" id="pseudo"
                        class="w-96 bg-black bg-opacity-30 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
+                <span id="error_pseudo" class="hidden mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
                     * Le pseudo saisi n'est pas valide
                 </span>
             </div>
@@ -82,8 +76,8 @@
                 <input name="password" placeholder="*************"
                        type="password" id="password"
                        class="w-96 bg-black bg-opacity-20 border-blue-300 border rounded-lg px-2 py-6 md:px-8 text-sm my-2 shadow-2xl">
-                <span class="mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
-                    * Erreur
+                <span id="error_password" class="hidden mt-5 text-red-400 text-xs absolute -bottom-3 left-0">
+                    * Le mot de passe saisi n'est pas valide
                 </span>
             </div>
         </fieldset>
@@ -98,8 +92,5 @@
         </div>
     </form>
 </div>
-
-<script src="<%= request.getContextPath()%>/js/index.js"></script>
-
 </body>
 </html>
