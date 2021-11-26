@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/ranking.css"/>
 </head>
 
-<body class="bg-gray-900 text-gray-50 relative">
+<body class="relative text-gray-50 bg-gray-900">
 <div class="firefly"></div>
 <div class="firefly"></div>
 <div class="firefly"></div>
@@ -35,38 +35,101 @@
 <div class="firefly"></div>
 <div class="firefly"></div>
 <div class="firefly"></div>
-<div class="overflow-hidden absolute h-screen w-screen">
-    <div class="w-full h-full relative">
+<div class="overflow-hidden absolute w-screen h-screen">
+    <div class="relative w-full h-full">
         <img src="<%= request.getContextPath()%>/assets/svg/ranking.svg" alt="Rank"
-             class="w-96 h-96 absolute -bottom-20 -left-20 transform rotate-12 opacity-10 pointer-events-none">
-        <a href="/JavaB3Jeu/accueil" class="absolute top-0 left-0 flex justify-center items-center w-20 h-20 p-4 z-50">
+             class="absolute -bottom-20 -left-20 w-96 h-96 opacity-10 transform rotate-12 pointer-events-none">
+        <a href="/JavaB3Jeu/accueil" class="flex absolute top-0 left-0 z-50 justify-center items-center p-4 w-20 h-20">
             <img src="<%= request.getContextPath()%>/assets/svg/home.svg" alt="accueil"
                  class="w-8 h-8">
         </a>
-        <a href="/JavaB3Jeu/infos" class="absolute top-0 right-0 flex justify-center items-center w-20 h-20 p-4 z-50">
+        <button id="btnOpenModal" class="flex absolute top-0 right-0 z-50 justify-center items-center p-4 w-20 h-20">
             <img src="<%= request.getContextPath()%>/assets/svg/info.svg" alt="info"
                  class="w-8 h-8">
-        </a>
-        <div class="absolute bottom-0 right-0 flex justify-center items-center z-50">
+        </button>
+        <div id="modal"
+             class="z-0 opacity-0 pointer-events-none overflow-x-auto absolute top-1/2 right-1/2 my-3 max-w-lg bg-gray-800 rounded-lg shadow-lg transform translate-x-1/2 -translate-y-1/2 transition transition-opacity">
+            <div class="flex px-5 py-4 border-b border-gray-900">
+                <div class="flex justify-center items-center w-5">
+                    <svg class="w-6 h-6 text-blue-400 fill-current" viewBox="0 0 40 40"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path
+                                d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"/>
+                    </svg>
+                </div>
+                <span class="ml-2 text-lg font-bold text-gray-100">Les règles du jeu !</span>
+            </div>
+
+            <div class="px-10 py-5 text-gray-300 text-xs">
+                <p class="my-1">
+                    On observe les éléments de l'expression de gauche à droite, on y trouve deux types d'éléments : les
+                    opérandes et les opérateurs.
+                    Lorsque l'on voit un opérande, on l'ajoute à une liste, au départ vide, qui se remplit d'opérande
+                    petit à petit.
+                    Lorsque l'on voit un opérateur, deux possibilités s'offre a nous :
+                </p>
+                <p class="my-1">
+                    - S’il n'y a qu'un opérande dans la liste alors que l'opérateur a besoin de deux paramètres ou plus,
+                    on continue d'observer l'expression jusqu'a que l'on est le nombre d'opérandes souhaité.
+                </p>
+                <p class="my-1">
+                    - S’il y a le bon nombre d'opérandes dans la liste, alors on effectue l'opération avec l'opérateur
+                    en passant en paramètre les opérandes selon leurs ordres d'apparition dans l'expression.
+                </p>
+                <p class="my-1">
+                    On remplace alors l'ensemble des opérandes utilisé dans notre liste par le résultat obtenu (que l'on
+                    place donc au début de la liste)
+                </p>
+                <p class="my-1">
+                    Si l'on répète l'opération pour tous les éléments de notre expression,
+                    on doit finir l'expression avec un seul élément dans notre liste temporaire d'opérande : il s'agit
+                    du
+                    résultat de l'expression.
+                </p>
+                <p class="my-1">
+                    Attention cependant : les opérandes présents dans l'expression sont forcément des chiffres, ainsi,
+                    si
+                    vous avec l'expression "124*2+-",
+                    la liste des opérandes est [1,2,4,2] et la liste des opérateurs est [*,+,-]
+                </p>
+                <p class="my-4 ml-4 text-sm font-bold">
+                    Si on prend un exemple : (Wikipédia)
+                    <br>Le calcul [ 1 + 2 * 4 + 3] peut se lire intuitivement :
+                    <br>
+                    <br>je mets 1, (1) ;
+                    <br>j'ajoute 2, (2 +) ;
+                    <br>je multiplie par 4, (4 *) ;
+                    <br>j'ajoute 3. (3 +).
+                    <br>ce qui donne simplement 1 2 + 4 * 3 +
+                    <br>Et résulte en "15"
+                </p>
+            </div>
+            <div class="flex justify-end px-5 py-4 bg-gray-800 border-t border-gray-900">
+                <button id="btnCloseModal" class="px-3 py-2 text-sm text-gray-200 transition duration-150 hover:text-gray-100">
+                    Ok !
+                </button>
+            </div>
+        </div>
+        <div class="flex absolute right-0 bottom-0 z-50 justify-center items-center">
             <div class="flex flex-col justify-center items-center p-8">
                 <a href="/JavaB3Jeu/playing"
-                   class="w-28 h-28 flex justify-center items-center bg-black bg-opacity-30 border border-black border-opacity-60 rounded-full shadow-2xl">
+                   class="flex justify-center items-center w-28 h-28 bg-black bg-opacity-30 rounded-full border border-black border-opacity-60 shadow-2xl">
                     <img src="<%= request.getContextPath()%>/assets/svg/synchronize.svg" alt="Replay"
                          class="w-16 h-16">
                 </a>
-                <h2 class="text-2xl mt-4 text-gray-50">Rejouer !</h2>
+                <h2 class="mt-4 text-2xl text-gray-50">Rejouer !</h2>
             </div>
         </div>
     </div>
 </div>
-<div class="absolute h-screen w-screen">
-    <div class="h-full w-full flex flex-col justify-center items-center align-center">
+<div class="absolute w-screen h-screen">
+    <div class="flex flex-col justify-center items-center w-full h-full align-center">
         <div>
-            <div class="flex items-center justify-center min-h-screen bg-gray-900">
+            <div class="flex justify-center items-center min-h-screen bg-gray-900">
                 <div class="col-span-12">
-                    <div class="overflow-auto lg:overflow-visible ">
-                        <table class="table text-gray-400 border-separate space-y-6 text-sm">
-                            <thead class="bg-gray-800 text-gray-500">
+                    <div class="overflow-auto lg:overflow-visible">
+                        <table class="table space-y-6 text-sm text-gray-400 border-separate">
+                            <thead class="text-gray-500 bg-gray-800">
                             <tr>
                                 <th class="p-3">Rang</th>
                                 <th class="p-3 text-left">Pseudo</th>
@@ -158,7 +221,7 @@
                             </tbody>
                         </table>
                         <div class="flex">
-                            <nav class="relative z-0 inline-flex justify-between w-full shadow-sm">
+                            <nav class="inline-flex relative z-0 justify-between w-full shadow-sm">
                                 <%--                                v-if="pagination.current_page > pagination.last_page--%>
                                 <div>
                                     <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-black border-opacity-50
@@ -166,7 +229,7 @@
                                     hover:text-blue-400 focus:z-10 focus:outline-none focus:border-blue-300
                                     focus:shadow-outline-blue active:bg-opacity-20 active:text-blue-500
                                     transition ease-in-out duration-150" aria-label="Previous">
-                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                   d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                   clip-rule="evenodd"/>
@@ -180,7 +243,7 @@
                                        hover:text-blue-400 focus:z-10 focus:outline-none focus:border-blue-300
                                        focus:shadow-outline-blue active:bg-opacity-20 active:text-blue-500
                                        transition ease-in-out duration-150" aria-label="Next">
-                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                   clip-rule="evenodd"/>
@@ -195,9 +258,9 @@
         </div>
     </div>
 </div>
-<div class="h-full w-full flex flex-col justify-center items-center align-center relative">
-    <div class="flex flex-col-reverse lg:flex-row justify-center items-center mt-20">
-        <h2 class="text-5xl lg:p-10 font-black">Polish Brain'z</h2>
+<div class="flex relative flex-col justify-center items-center w-full h-full align-center">
+    <div class="flex flex-col-reverse justify-center items-center mt-20 lg:flex-row">
+        <h2 class="text-5xl font-black lg:p-10">Polish Brain'z</h2>
     </div>
 </div>
 </body>
