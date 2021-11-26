@@ -47,7 +47,7 @@
                  class="w-8 h-8">
         </button>
         <div id="modal"
-             class="z-0 opacity-0 pointer-events-none overflow-x-auto absolute top-1/2 right-1/2 my-3 max-w-lg bg-gray-800 rounded-lg shadow-lg transform translate-x-1/2 -translate-y-1/2 transition transition-opacity">
+             class="overflow-x-auto absolute top-1/2 right-1/2 z-0 my-3 max-w-lg bg-gray-800 rounded-lg shadow-lg opacity-0 transition transition-opacity transform translate-x-1/2 -translate-y-1/2 pointer-events-none">
             <div class="flex px-5 py-4 border-b border-gray-900">
                 <div class="flex justify-center items-center w-5">
                     <svg class="w-6 h-6 text-blue-400 fill-current" viewBox="0 0 40 40"
@@ -59,7 +59,7 @@
                 <span class="ml-2 text-lg font-bold text-gray-100">Les règles du jeu !</span>
             </div>
 
-            <div class="px-10 py-5 text-gray-300 text-xs">
+            <div class="px-10 py-5 text-xs text-gray-300">
                 <p class="my-1">
                     On observe les éléments de l'expression de gauche à droite, on y trouve deux types d'éléments : les
                     opérandes et les opérateurs.
