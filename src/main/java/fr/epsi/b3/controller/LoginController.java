@@ -9,10 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/login")
+@WebServlet(urlPatterns = "/")
 public class LoginController extends HttpServlet {
     @Resource(name = "PostgreSQL Database")
     private DataSource dataSource;
@@ -23,5 +24,19 @@ public class LoginController extends HttpServlet {
         DataSourcePgSQL.initializationConnection(this.dataSource);
 
         CrudUsers.setDataCrudUsers();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+
+        CrudUsers crudUsers = new CrudUsers();
+//        session.setAttribute("user", crudUsers.getUserByEmailAndPassword(username, password).getId());
+
+        resp.sendRedirect(req.getContextPath() + "/accueil");
     }
 }
