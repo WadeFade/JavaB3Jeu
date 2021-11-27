@@ -13,7 +13,7 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
-    <script src="<%= request.getContextPath()%>/js/index.js"></script>
+    <script src="<%= request.getContextPath()%>/js/index.js" defer></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
 </head>

@@ -8,11 +8,10 @@ import javax.servlet.http.HttpServlet;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class CrudUsers extends HttpServlet {
     //    Declaration part
-    static List<User> users;
+    static ArrayList<User> users;
 
     static public void setDataCrudUsers() {
         users = new ArrayList<>();
@@ -45,7 +44,7 @@ public class CrudUsers extends HttpServlet {
         }
     }
 
-    static public List<User> addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password) {
+    static public ArrayList<User> addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password) {
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
         try {
@@ -136,14 +135,13 @@ public class CrudUsers extends HttpServlet {
         return new User();
     }
 
-    static public List<User> getRanking() {
+    static public ArrayList<User> getRanking() {
         setDataCrudUsers();
-        users = new ArrayList<>();
         Collections.sort(users, new UserScoreComparator());
         return users;
     }
 
-    static public List<User> getUsers() {
+    static public ArrayList<User> getUsers() {
         return users;
     }
 }

@@ -1,4 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/xml" %>
+<%@ page import="java.util.List" %>
+<%@ page import="fr.epsi.b3.model.User" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,7 +17,8 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
-    <script src="<%= request.getContextPath()%>/js/index.js"></script>
+    <script src="<%= request.getContextPath()%>/js/index.js" defer></script>
+    <script src="<%= request.getContextPath()%>/js/ranking_paginate.js" defer></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/ranking.css"/>
@@ -107,7 +111,8 @@
                 </p>
             </div>
             <div class="flex justify-end px-5 py-4 bg-gray-800 border-t border-gray-900">
-                <button id="btnCloseModal" class="px-3 py-2 text-sm text-gray-200 transition duration-150 hover:text-gray-100">
+                <button id="btnCloseModal"
+                        class="px-3 py-2 text-sm text-gray-200 transition duration-150 hover:text-gray-100">
                     Ok !
                 </button>
             </div>
@@ -127,11 +132,11 @@
 <div class="absolute w-screen h-screen">
     <div class="flex flex-col justify-center items-center w-full h-full align-center">
         <div>
-            <div class="flex justify-center items-center min-h-screen bg-gray-900">
+            <div class="flex justify-center items-center min-h-screen">
                 <div class="col-span-12">
                     <div class="overflow-auto lg:overflow-visible">
                         <table class="table space-y-6 text-sm text-gray-400 border-separate">
-                            <thead class="text-gray-500 bg-gray-800">
+                            <thead class="text-gray-200 bg-gray-800">
                             <tr>
                                 <th class="p-3">Rang</th>
                                 <th class="p-3 text-left">Pseudo</th>
@@ -140,32 +145,35 @@
                                 <th class="p-3 text-left">Points</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <%= request.getAttribute("users") %>
-<%--                            <c:forEach var="rank" items="${ranks}">--%>
-                                <tr class="bg-gray-800">
-                                    <td class="p-3 font-bold">
-                                        #1
-                                    </td>
-                                    <td class="p-3 font-bold">
-                                        Pseudo
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="p-3">
-                                        <p class="text-blue-300">
-                                            2365000 pts
-                                        </p>
-                                    </td>
-                                </tr>
-<%--                            </c:forEach>--%>
+                            <tbody id="rank">
+                            <% ArrayList<User> usr = (ArrayList<User>) request.getAttribute("users");%>
+                            <% Integer pageToDisplay = 0; %>
+                            <%for (int i = 0; i < usr.size(); i++) {%>
+                            <% if ((i % 5) == 0) {
+                                pageToDisplay++;
+                            }%>
+                            <tr class="bg-gray-800" data-page="<%=pageToDisplay.toString()%>">
+                                <td class="p-3 font-bold">
+                                    <%=usr.get(i).getId()%>
+                                </td>
+                                <td class="p-3 font-bold">
+                                    <%=usr.get(i).getPseudo()%>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td class="p-3">
+                                    <p class="text-blue-300">
+                                        <%=usr.get(i).getScore()%>
+                                    </p>
+                                </td>
+                            </tr>
+                            <%}%>
                             </tbody>
                         </table>
                         <div class="flex">
-                            <nav class="inline-flex relative z-0 justify-between w-full shadow-sm">
-                                <%--                                v-if="pagination.current_page > pagination.last_page--%>
+                            <nav class="inline-flex relative z-0 justify-between w-full">
                                 <div>
-                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-black border-opacity-50
+                                    <button id="back_btn" class="opacity-30 pointer-events-none relative inline-flex items-center px-2 py-2 rounded-l-md border border-black border-opacity-50
                                     bg-black bg-opacity-30 text-sm leading-5 font-medium text-blue-500
                                     hover:text-blue-400 focus:z-10 focus:outline-none focus:border-blue-300
                                     focus:shadow-outline-blue active:bg-opacity-20 active:text-blue-500
@@ -175,11 +183,10 @@
                                                   d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                   clip-rule="evenodd"/>
                                         </svg>
-                                    </a>
+                                    </button>
                                 </div>
-                                <%--                                v-if="pagination.current_page < pagination.last_page --%>
                                 <div>
-                                    <a href="#" class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-black border-opacity-50
+                                    <button id="next_btn" class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-black border-opacity-50
                                        bg-black bg-opacity-30 text-sm leading-5 font-medium text-blue-500
                                        hover:text-blue-400 focus:z-10 focus:outline-none focus:border-blue-300
                                        focus:shadow-outline-blue active:bg-opacity-20 active:text-blue-500
@@ -189,7 +196,7 @@
                                                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                   clip-rule="evenodd"/>
                                         </svg>
-                                    </a>
+                                    </button>
                                 </div>
                             </nav>
                         </div>
