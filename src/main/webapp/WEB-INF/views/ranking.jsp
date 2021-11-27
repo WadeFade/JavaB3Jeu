@@ -154,7 +154,7 @@
                             }%>
                             <tr class="bg-gray-800" data-page="<%=pageToDisplay.toString()%>">
                                 <td class="p-3 font-bold">
-                                    <%=usr.get(i).getId()%>
+                                    <%=i+1%>
                                 </td>
                                 <td class="p-3 font-bold">
                                     <%=usr.get(i).getPseudo()%>
