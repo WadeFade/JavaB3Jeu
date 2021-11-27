@@ -141,7 +141,7 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                            <%= request.getAttribute("users") %>
 <%--                            <c:forEach var="rank" items="${ranks}">--%>
                                 <tr class="bg-gray-800">
                                     <td class="p-3 font-bold">

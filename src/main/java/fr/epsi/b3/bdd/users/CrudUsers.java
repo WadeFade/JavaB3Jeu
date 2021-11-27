@@ -14,10 +14,6 @@ public class CrudUsers extends HttpServlet {
     //    Declaration part
     static List<User> users;
 
-    public CrudUsers() {
-        setDataCrudUsers();
-    }
-
     static public void setDataCrudUsers() {
         users = new ArrayList<>();
         Connection conn = DataSourcePgSQL.initializationConnection();
