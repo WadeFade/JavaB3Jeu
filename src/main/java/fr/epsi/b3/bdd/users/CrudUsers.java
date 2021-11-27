@@ -12,14 +12,14 @@ import java.util.List;
 
 public class CrudUsers extends HttpServlet {
     //    Declaration part
-    private List<User> users;
+    static List<User> users;
 
     public CrudUsers() {
-        this.setDataCrudUsers();
+        setDataCrudUsers();
     }
 
-    public void setDataCrudUsers(){
-        this.users = new ArrayList<>();
+    static public void setDataCrudUsers() {
+        users = new ArrayList<>();
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
         try {
@@ -34,7 +34,7 @@ public class CrudUsers extends HttpServlet {
                 if (!rs.next()) break;
                 System.out.print("Column returned");
 
-                this.users.add(new User(
+                users.add(new User(
                         rs.getInt("id"),
                         rs.getString("pseudo"),
                         rs.getString("email"),
@@ -49,7 +49,7 @@ public class CrudUsers extends HttpServlet {
         }
     }
 
-    public List<User> addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password) {
+    static public List<User> addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password) {
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
         try {
@@ -63,7 +63,7 @@ public class CrudUsers extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             conn.commit();
 
-            this.users.add(new User(
+            users.add(new User(
                     rs.getInt("id"),
                     rs.getString("pseudo"),
                     rs.getString("email"),
@@ -76,10 +76,10 @@ public class CrudUsers extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return this.users;
+        return users;
     }
 
-    public User updateUser(Integer id,String pseudo, String email, Integer gamePlayed, Integer score, String password){
+    static public User updateUser(Integer id, String pseudo, String email, Integer gamePlayed, Integer score, String password) {
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
         try {
@@ -96,9 +96,15 @@ public class CrudUsers extends HttpServlet {
             conn.commit();
             st.close();
 
-            for (int i = 0; i < this.users.size(); i++){
-                if(this.users.get(i).getId().equals(id)){
-                    return this.users.get(i);
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getId().equals(id)) {
+                    users.set(i, new User(id,
+                            pseudo,
+                            email,
+                            gamePlayed,
+                            score,
+                            password));
+                    return users.get(i);
                 }
             }
         } catch (SQLException e) {
@@ -107,40 +113,41 @@ public class CrudUsers extends HttpServlet {
         return new User();
     }
 
-    public User getUserById(Integer id){
-        for (int i = 0; i < this.users.size(); i++){
-            if(this.users.get(i).getId().equals(id)){
-                return this.users.get(i);
+    static public User getUserById(Integer id) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getId().equals(id)) {
+                return users.get(i);
             }
         }
         return new User();
     }
 
-    public User getUserByEmail(String email){
-        for (int i = 0; i < this.users.size(); i++){
-            if(this.users.get(i).getEmail().equals(email)){
-                return this.users.get(i);
+    static public User getUserByEmail(String email) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getEmail().equals(email)) {
+                return users.get(i);
             }
         }
         return new User();
     }
 
-    public User getUserByPseudo(String pseudo){
-        for (int i = 0; i < this.users.size(); i++){
-            if(this.users.get(i).getEmail().equals(pseudo)){
-                return this.users.get(i);
+    static public User getUserByPseudo(String pseudo) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getEmail().equals(pseudo)) {
+                return users.get(i);
             }
         }
         return new User();
     }
 
-    public void getRanking(){
-        this.setDataCrudUsers();
-        this.users = new ArrayList<>();
-        Collections.sort(this.users,new UserScoreComparator());
+    static public List<User> getRanking() {
+        setDataCrudUsers();
+        users = new ArrayList<>();
+        Collections.sort(users, new UserScoreComparator());
+        return users;
     }
 
-    public List<User> getUsers() {
-        return this.users;
+    static public List<User> getUsers() {
+        return users;
     }
 }

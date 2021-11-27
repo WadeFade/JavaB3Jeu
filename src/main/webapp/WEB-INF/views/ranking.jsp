@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/xml" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -100,7 +101,8 @@
                     <br>j'ajoute 2, (2 +) ;
                     <br>je multiplie par 4, (4 *) ;
                     <br>j'ajoute 3. (3 +).
-                    <br>ce qui donne simplement 1 2 + 4 * 3 +
+                    <br>
+                    <br>Ce qui donne simplement 1 2 + 4 * 3 +
                     <br>Et résulte en "15"
                 </p>
             </div>
@@ -139,85 +141,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="bg-gray-800">
-                                <td class="p-3 font-bold">
-                                    #1
-                                </td>
-                                <td class="p-3 font-bold">
-                                    Pseudo
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td class="p-3">
-                                    <p class="text-blue-300">
-                                        2365000 pts
-                                    </p>
-                                </td>
-                            </tr>
 
-                            <tr class="bg-gray-800">
-                                <td class="p-3 font-bold">
-                                    #2
-                                </td>
-                                <td class="p-3 font-bold">
-                                    Pseudo
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td class="p-3">
-                                    <p class="text-blue-300">
-                                        23650 pts
-                                    </p>
-                                </td>
-                            </tr>
-
-                            <tr class="bg-gray-800">
-                                <td class="p-3 font-bold">
-                                    #3
-                                </td>
-                                <td class="p-3 font-bold">
-                                    Pseudo
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td class="p-3">
-                                    <p class="text-blue-300">
-                                        50 pts
-                                    </p>
-                                </td>
-                            </tr>
-
-                            <tr class="bg-gray-800">
-                                <td class="p-3 font-bold">
-                                    #4
-                                </td>
-                                <td class="p-3 font-bold">
-                                    Pseudo
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td class="p-3">
-                                    <p class="text-blue-300">
-                                        50 pts
-                                    </p>
-                                </td>
-                            </tr>
-
-                            <tr class="bg-gray-800">
-                                <td class="p-3 font-bold">
-                                    #5
-                                </td>
-                                <td class="p-3 font-bold">
-                                    Pseudo
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td class="p-3">
-                                    <p class="text-blue-300">
-                                        50 pts
-                                    </p>
-                                </td>
-                            </tr>
+<%--                            <c:forEach var="rank" items="${ranks}">--%>
+                                <tr class="bg-gray-800">
+                                    <td class="p-3 font-bold">
+                                        #1
+                                    </td>
+                                    <td class="p-3 font-bold">
+                                        Pseudo
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="p-3">
+                                        <p class="text-blue-300">
+                                            2365000 pts
+                                        </p>
+                                    </td>
+                                </tr>
+<%--                            </c:forEach>--%>
                             </tbody>
                         </table>
                         <div class="flex">

@@ -99,7 +99,8 @@
                     <br>j'ajoute 2, (2 +) ;
                     <br>je multiplie par 4, (4 *) ;
                     <br>j'ajoute 3. (3 +).
-                    <br>ce qui donne simplement 1 2 + 4 * 3 +
+                    <br>
+                    <br>Ce qui donne simplement 1 2 + 4 * 3 +
                     <br>Et résulte en "15"
                 </p>
             </div>
