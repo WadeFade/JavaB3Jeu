@@ -11,10 +11,14 @@ import java.util.Collections;
 
 public class CrudUsers extends HttpServlet {
     //    Declaration part
-    static ArrayList<User> users;
+    private ArrayList<User> users;
 
-    static public void setDataCrudUsers() {
-        users = new ArrayList<>();
+    public CrudUsers() {
+        this.setDataCrudUsers();
+    }
+
+    public void setDataCrudUsers(){
+        this.users = new ArrayList<>();
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
         try {
@@ -44,104 +48,113 @@ public class CrudUsers extends HttpServlet {
         }
     }
 
-    static public ArrayList<User> addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password) {
+    public User addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password) throws SQLException {
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
-        try {
-            assert conn != null;
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO public.\"User\" (pseudo, email, gamePlayed, score, password) VALUES (?, ?, ?, ?, ?);");
-            ps.setString(1, pseudo);
-            ps.setString(2, email);
-            ps.setInt(3, gamePlayed);
-            ps.setInt(4, score);
-            ps.setString(5, password);
-            ResultSet rs = ps.executeQuery();
-            conn.commit();
+        assert conn != null;
 
-            users.add(new User(
-                    rs.getInt("id"),
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO public.\"User\" (pseudo, email, gamePlayed, score, password) VALUES (?, ?, ?, ?, ?);");
+        ps.setString(1, pseudo);
+        ps.setString(2, email);
+        ps.setInt(3, gamePlayed);
+        ps.setInt(4, score);
+        ps.setString(5, password);
+        ResultSet rs = ps.executeQuery();
+        conn.commit();
+        User newUser = new User(
+                rs.getInt("id"),
+                rs.getString("pseudo"),
+                rs.getString("email"),
+                rs.getInt("gamePlayed"),
+                rs.getInt("score"),
+                rs.getString("password"));
+        rs.close();
+        st.close();
+
+        return newUser;
+    }
+
+    public void updateUser(Integer id, String pseudo, String email, Integer gamePlayed, Integer score, String password) throws SQLException {
+        Connection conn = DataSourcePgSQL.initializationConnection();
+        Statement st = null;
+
+        assert conn != null;
+        PreparedStatement ps = conn.prepareStatement("UPDATE public.\"User\"" +
+                "\tSET \"pseudo\"=?, \"email\"=?, \"gamePlayed\"=?, \"score\"=?, \"password\"=?" +
+                "\tWHERE \"id\"=?;");
+        ps.setString(1, pseudo);
+        ps.setString(2, email);
+        ps.setInt(3, gamePlayed);
+        ps.setInt(4, score);
+        ps.setString(5, password);
+        int rs = ps.executeUpdate();
+        conn.commit();
+        st.close();
+    }
+
+    public User getUserByEmail(String email) {
+        try {
+            Connection conn = DataSourcePgSQL.initializationConnection();
+            Statement st;
+
+            st = conn.createStatement();
+
+            ResultSet rs;
+            assert st != null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM public.\"User\" WHERE \"email\"=?;");
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            rs.next();
+
+            User user = new User(rs.getInt("id"),
                     rs.getString("pseudo"),
                     rs.getString("email"),
                     rs.getInt("gamePlayed"),
                     rs.getInt("score"),
-                    rs.getString("password")));
-
-            rs.close();
-            st.close();
+                    rs.getString("password"));
+            System.out.println(user);
+            return user;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return users;
+        return null;
     }
 
-    static public User updateUser(Integer id, String pseudo, String email, Integer gamePlayed, Integer score, String password) {
-        Connection conn = DataSourcePgSQL.initializationConnection();
-        Statement st = null;
+    public User getUserById(Integer id) {
         try {
-            assert conn != null;
-            PreparedStatement ps = conn.prepareStatement("UPDATE public.\"User\"" +
-                    "\tSET \"pseudo\"=?, \"email\"=?, \"gamePlayed\"=?, \"score\"=?, \"password\"=?" +
-                    "\tWHERE \"id\"=?;");
-            ps.setString(1, pseudo);
-            ps.setString(2, email);
-            ps.setInt(3, gamePlayed);
-            ps.setInt(4, score);
-            ps.setString(5, password);
-            int rs = ps.executeUpdate();
-            conn.commit();
-            st.close();
+            Connection conn = DataSourcePgSQL.initializationConnection();
+            Statement st;
 
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getId().equals(id)) {
-                    users.set(i, new User(id,
-                            pseudo,
-                            email,
-                            gamePlayed,
-                            score,
-                            password));
-                    return users.get(i);
-                }
-            }
+            st = conn.createStatement();
+
+            ResultSet rs;
+            assert st != null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM public.\"User\" WHERE \"id\"=?;");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            rs.next();
+
+            User user = new User(rs.getInt("id"),
+                    rs.getString("pseudo"),
+                    rs.getString("email"),
+                    rs.getInt("gamePlayed"),
+                    rs.getInt("score"),
+                    rs.getString("password"));
+            System.out.println(user);
+            return user;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new User();
+        return null;
     }
 
-    static public User getUserById(Integer id) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId().equals(id)) {
-                return users.get(i);
-            }
-        }
-        return new User();
-    }
-
-    static public User getUserByEmail(String email) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getEmail().equals(email)) {
-                return users.get(i);
-            }
-        }
-        return new User();
-    }
-
-    static public User getUserByPseudo(String pseudo) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getEmail().equals(pseudo)) {
-                return users.get(i);
-            }
-        }
-        return new User();
-    }
-
-    static public ArrayList<User> getRanking() {
-        setDataCrudUsers();
-        Collections.sort(users, new UserScoreComparator());
+    public ArrayList<User> getRanking() {
+        this.setDataCrudUsers();
+        Collections.sort(this.users, new UserScoreComparator());
         return users;
     }
 
-    static public ArrayList<User> getUsers() {
-        return users;
+    public ArrayList<User> getUsers() {
+        return this.users;
     }
 }
