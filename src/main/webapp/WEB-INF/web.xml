@@ -5,7 +5,7 @@
          version="2.5">
   <display-name>Polish Brain'z App !</display-name>
   <welcome-file-list>
-    <welcome-file>/WEB-INF/views/login.jsp</welcome-file>
+    <welcome-file>login</welcome-file>
   </welcome-file-list>
   <jsp-config>
     <jsp-property-group>

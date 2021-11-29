@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Objects;
 
-@WebServlet(urlPatterns = "/login")
+@WebServlet(urlPatterns = "/")
 public class LoginController extends HttpServlet {
     @Resource(name = "PostgreSQL Database")
     private DataSource dataSource;
@@ -22,6 +23,22 @@ public class LoginController extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         DataSourcePgSQL.initializationConnection(this.dataSource);
 
-        CrudUsers crudUsers = new CrudUsers();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+
+        if (Objects.equals(Objects.requireNonNull(CrudUsers.getUserByEmail(email)).getPassword(), password)) {
+            req.getSession().setAttribute("user", Objects.requireNonNull(CrudUsers.getUserByEmail(email)).getId());
+            System.out.println("ID : " + req.getSession().getAttribute("user"));
+            System.out.println(req.getContextPath() + "/accueil");
+//            req.getRequestDispatcher(req.getContextPath() + "/accueil").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/accueil");
+        } else {
+            System.out.println("mauvais email/mdp");
+        }
     }
 }

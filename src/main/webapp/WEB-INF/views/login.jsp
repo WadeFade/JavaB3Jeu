@@ -50,7 +50,7 @@
         <h2 class="text-5xl font-black lg:p-10">Polish Brain'z</h2>
     </div>
 
-    <form class="flex flex-col justify-center items-center w-96 h-full text-blue-300">
+    <form method="POST" action="/JavaB3Jeu/login" class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
         <fieldset>
             <div class="flex relative flex-col my-10">
                 <label for="email" class="text-xs">Email</label>
@@ -72,8 +72,8 @@
                 </span>
             </div>
         </fieldset>
-        <div class="flex flex-row-reverse justify-between w-full form-buttons">
-            <button class="px-10 py-5 text-sm text-gray-800 bg-blue-300 rounded-lg">
+        <div class="form-buttons w-full flex justify-between flex-row-reverse">
+            <button type="submit" class="bg-blue-300 px-10 py-5 rounded-lg text-gray-800 text-sm">
                 Se connecter
             </button>
             <a type="button" class="px-10 py-5 text-sm text-blue-300 rounded-lg border border-blue-300"
