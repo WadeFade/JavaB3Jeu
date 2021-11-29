@@ -26,10 +26,7 @@ public class RankingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSourcePgSQL.initializationConnection(this.dataSource);
-        CrudUsers crudUsers = new CrudUsers();
-        ArrayList<User> users = new ArrayList<>(crudUsers.getRanking().size());
-        users.addAll(crudUsers.getRanking());
-        req.setAttribute("users", users);
+        req.setAttribute("users", CrudUsers.getRanking());
         req.getRequestDispatcher("/WEB-INF/views/ranking.jsp").forward(req, resp);
     }
 }
