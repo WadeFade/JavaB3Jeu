@@ -24,7 +24,7 @@ public class LoginController extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         DataSourcePgSQL.initializationConnection(this.dataSource);
 
-        CrudUsers.setDataCrudUsers();
+        CrudUsers crudUsers = new CrudUsers();
     }
 
     @Override
