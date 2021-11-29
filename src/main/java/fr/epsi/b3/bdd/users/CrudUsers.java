@@ -4,6 +4,7 @@ import fr.epsi.b3.bdd.DataSourcePgSQL;
 import fr.epsi.b3.model.User;
 import fr.epsi.b3.model.UserScoreComparator;
 
+
 import javax.servlet.http.HttpServlet;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class CrudUsers extends HttpServlet {
     static public void setDataCrudUsers() {
         users = new ArrayList<>();
         Connection conn = DataSourcePgSQL.initializationConnection();
-        Statement st = null;
+        Statement st;
         try {
             assert conn != null;
             st = conn.createStatement();
@@ -44,40 +45,30 @@ public class CrudUsers extends HttpServlet {
         }
     }
 
-    static public ArrayList<User> addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password) {
+    static public void addUser(String pseudo, String email, Integer gamePlayed, Integer score, String password)  {
         Connection conn = DataSourcePgSQL.initializationConnection();
         Statement st = null;
-        try {
-            assert conn != null;
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO public.\"User\" (pseudo, email, gamePlayed, score, password) VALUES (?, ?, ?, ?, ?);");
-            ps.setString(1, pseudo);
-            ps.setString(2, email);
-            ps.setInt(3, gamePlayed);
-            ps.setInt(4, score);
-            ps.setString(5, password);
-            ResultSet rs = ps.executeQuery();
-            conn.commit();
 
-            users.add(new User(
-                    rs.getInt("id"),
-                    rs.getString("pseudo"),
-                    rs.getString("email"),
-                    rs.getInt("gamePlayed"),
-                    rs.getInt("score"),
-                    rs.getString("password")));
+        assert conn != null;
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO public.\"User\" (pseudo, email, \"gamePlayed\", score, password) VALUES (?, ?, ?, ?, ?);");
+        ps.setString(1, pseudo);
+        ps.setString(2, email);
+        ps.setInt(3, gamePlayed);
+        ps.setInt(4, score);
+        ps.setString(5, password);
+        ResultSet rs = ps.executeQuery();
+        conn.commit();
 
-            rs.close();
-            st.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
+        rs.close();
+        assert false;
+        st.close();
+
     }
 
-    static public User updateUser(Integer id, String pseudo, String email, Integer gamePlayed, Integer score, String password) {
-        Connection conn = DataSourcePgSQL.initializationConnection();
-        Statement st = null;
+    static public void updateUser(Integer id, String pseudo, String email, Integer gamePlayed, Integer score, String password) {
         try {
+            Connection conn = DataSourcePgSQL.initializationConnection();
+            Statement st = null;
             assert conn != null;
             PreparedStatement ps = conn.prepareStatement("UPDATE public.\"User\"" +
                     "\tSET \"pseudo\"=?, \"email\"=?, \"gamePlayed\"=?, \"score\"=?, \"password\"=?" +
@@ -87,52 +78,70 @@ public class CrudUsers extends HttpServlet {
             ps.setInt(3, gamePlayed);
             ps.setInt(4, score);
             ps.setString(5, password);
-            int rs = ps.executeUpdate();
+            ps.setInt(6, id);
+            ps.executeUpdate();
             conn.commit();
+            assert false;
             st.close();
-
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getId().equals(id)) {
-                    users.set(i, new User(id,
-                            pseudo,
-                            email,
-                            gamePlayed,
-                            score,
-                            password));
-                    return users.get(i);
-                }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new User();
     }
 
     static public User getUserById(Integer id) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId().equals(id)) {
-                return users.get(i);
-            }
+        try {
+            Connection conn = DataSourcePgSQL.initializationConnection();
+            Statement st;
+
+            st = conn.createStatement();
+
+            ResultSet rs;
+            assert st != null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM public.\"User\" WHERE \"id\"=?;");
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            rs.next();
+
+            User user = new User(rs.getInt("id"),
+                    rs.getString("pseudo"),
+                    rs.getString("email"),
+                    rs.getInt("gamePlayed"),
+                    rs.getInt("score"),
+                    rs.getString("password"));
+            System.out.println(user);
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return new User();
+        return null;
     }
 
     static public User getUserByEmail(String email) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getEmail().equals(email)) {
-                return users.get(i);
-            }
-        }
-        return new User();
-    }
+        try {
+            Connection conn = DataSourcePgSQL.initializationConnection();
+            Statement st;
 
-    static public User getUserByPseudo(String pseudo) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getEmail().equals(pseudo)) {
-                return users.get(i);
-            }
+            st = conn.createStatement();
+
+            ResultSet rs;
+            assert st != null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM public.\"User\" WHERE \"email\"=?;");
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            rs.next();
+
+            User user = new User(rs.getInt("id"),
+                    rs.getString("pseudo"),
+                    rs.getString("email"),
+                    rs.getInt("gamePlayed"),
+                    rs.getInt("score"),
+                    rs.getString("password"));
+            System.out.println(user);
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return new User();
+        return null;
     }
 
     static public ArrayList<User> getRanking() {

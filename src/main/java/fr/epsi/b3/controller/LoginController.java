@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(urlPatterns = "/")
 public class LoginController extends HttpServlet {
@@ -31,12 +32,16 @@ public class LoginController extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        String username = req.getParameter("username");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        CrudUsers crudUsers = new CrudUsers();
-//        session.setAttribute("user", crudUsers.getUserByEmailAndPassword(username, password).getId());
-
-        resp.sendRedirect(req.getContextPath() + "/accueil");
+        if (Objects.equals(CrudUsers.getUserByEmail(email).getPassword(), password)) {
+            req.getSession().setAttribute("user", CrudUsers.getUserByEmail(email).getId());
+            System.out.println("ID : " + req.getSession().getAttribute("user"));
+            System.out.println(req.getContextPath() + "/accueil");
+            req.getRequestDispatcher(req.getContextPath() + "/accueil").forward(req, resp);
+        } else {
+            System.out.println("mauvais email/mdp");
+        }
     }
 }
