@@ -13,9 +13,8 @@
         Typekit.load({async: true});
     } catch (e) {
     }</script>
-    <script src="<%= request.getContextPath()%>/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" defer></script>
     <script src="<%= request.getContextPath()%>/js/errors.js" defer></script>
-    <script src="<%= request.getContextPath()%>/js/error_auth.js" defer></script>
     <script src="<%= request.getContextPath()%>/js/error_register.js" defer></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
@@ -49,7 +48,7 @@
     <div class="flex flex-col-reverse justify-center items-center mt-20 lg:flex-row">
         <h2 class="text-5xl font-black lg:p-10">Polish Brain'z</h2>
     </div>
-    <form class="flex flex-col justify-center items-center w-96 h-full text-blue-300">
+    <form method="POST" action="/JavaB3Jeu/register" class="flex flex-col justify-center items-center w-96 h-full text-blue-300">
         <fieldset>
             <div class="flex relative flex-col my-10">
                 <label for="email" class="text-xs">Email</label>
@@ -82,7 +81,7 @@
             </div>
         </fieldset>
         <div class="flex flex-row-reverse justify-between w-full form-buttons">
-            <button class="px-10 py-5 text-sm text-gray-800 bg-blue-300 rounded-lg">
+            <button id="button-form" type="submit" disabled class="px-10 py-5 text-sm text-gray-800 bg-blue-300 rounded-lg opacity-40">
                 S'inscrire
             </button>
             <a type="button" class="px-10 py-5 text-sm text-blue-300 rounded-lg border border-blue-300"

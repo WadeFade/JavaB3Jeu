@@ -37,18 +37,13 @@ public class Expression {
     }
 
     private int evaluateExpression(String expression) throws ScriptException {
-
-
         List<String> letters = Arrays.asList(expression.toString().split(""));
 
         int count = 0;
         Integer temp = null;
         String opperators = "";
 
-
         for (int i = 0; i < letters.size(); i++) {
-
-
             String item = letters.get(i);
 
             if (temp != null) {
@@ -73,12 +68,12 @@ public class Expression {
                 temp = Integer.parseInt(item);
             }
         }
+        System.out.println(count);
         return count;
     }
 
 
     private String generateExpression(int size) {
-
         List<String> opperators = Arrays.asList("*", "+", "-");
         Random r = new Random();
 
@@ -92,8 +87,6 @@ public class Expression {
                 expression.append(opperators.get(r.nextInt(opperators.size())));
             }
         }
-
-
         return expression.toString();
     }
 
@@ -106,7 +99,6 @@ public class Expression {
 
 
         for (char c : expression.toCharArray()) {
-
             switch (c) {
                 case '+':
                 case '*':

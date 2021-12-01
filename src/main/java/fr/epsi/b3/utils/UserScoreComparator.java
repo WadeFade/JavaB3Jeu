@@ -1,4 +1,6 @@
-package fr.epsi.b3.model;
+package fr.epsi.b3.utils;
+
+import fr.epsi.b3.model.User;
 
 import java.util.Comparator;
 

@@ -1,16 +1,15 @@
 package fr.epsi.b3.bdd.users;
 
-import fr.epsi.b3.bdd.DataSourcePgSQL;
+import fr.epsi.b3.utils.DataSourcePgSQL;
 import fr.epsi.b3.model.User;
-import fr.epsi.b3.model.UserScoreComparator;
+import fr.epsi.b3.utils.UserScoreComparator;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CrudUsers {
+public class UserDao {
     //    Declaration part
-
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
         try {
@@ -43,15 +42,15 @@ public class CrudUsers {
             Statement st = null;
             assert conn != null;
 
+            System.out.println("Insert into user");
             PreparedStatement ps = conn.prepareStatement("INSERT INTO public.\"User\" (pseudo, email, \"gamePlayed\", score, password) VALUES (?, ?, ?, ?, ?);");
             ps.setString(1, pseudo);
             ps.setString(2, email);
             ps.setInt(3, gamePlayed);
             ps.setInt(4, score);
             ps.setString(5, password);
-            ResultSet rs = ps.executeQuery();
+            ps.executeQuery();
             conn.commit();
-            rs.close();
             assert false;
             st.close();
         } catch (SQLException e) {
@@ -64,7 +63,6 @@ public class CrudUsers {
             password) {
         try {
             Connection conn = DataSourcePgSQL.initializationConnection();
-            Statement st = null;
 
             assert conn != null;
             PreparedStatement ps = conn.prepareStatement("UPDATE public.\"User\"" +
@@ -77,9 +75,7 @@ public class CrudUsers {
             ps.setString(5, password);
             ps.setInt(6, id);
             ps.executeUpdate();
-            conn.commit();
             assert false;
-            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,14 +94,48 @@ public class CrudUsers {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM public.\"User\" WHERE \"email\"=?;");
             ps.setString(1, email);
             rs = ps.executeQuery();
-            rs.next();
 
-            User user = new User(rs.getInt("id"),
-                    rs.getString("pseudo"),
-                    rs.getString("email"),
-                    rs.getInt("gamePlayed"),
-                    rs.getInt("score"),
-                    rs.getString("password"));
+            System.out.println("Get by email");
+            User user = null;
+            while (rs.next()) {
+                user = new User(rs.getInt("id"),
+                        rs.getString("pseudo"),
+                        rs.getString("email"),
+                        rs.getInt("gamePlayed"),
+                        rs.getInt("score"),
+                        rs.getString("password"));
+            }
+            System.out.println(user);
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static User getUserByPseudo(String pseudo) {
+        try {
+            Connection conn = DataSourcePgSQL.initializationConnection();
+            Statement st;
+
+            st = conn.createStatement();
+
+            ResultSet rs;
+            assert st != null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM public.\"User\" WHERE \"pseudo\"=?;");
+            ps.setString(1, pseudo);
+            rs = ps.executeQuery();
+
+            System.out.println("Get by pseudo");
+            User user = null;
+            while (rs.next()) {
+                user = new User(rs.getInt("id"),
+                        rs.getString("pseudo"),
+                        rs.getString("email"),
+                        rs.getInt("gamePlayed"),
+                        rs.getInt("score"),
+                        rs.getString("password"));
+            }
             System.out.println(user);
             return user;
         } catch (SQLException e) {
@@ -126,14 +156,17 @@ public class CrudUsers {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM public.\"User\" WHERE \"id\"=?;");
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            rs.next();
 
-            User user = new User(rs.getInt("id"),
-                    rs.getString("pseudo"),
-                    rs.getString("email"),
-                    rs.getInt("gamePlayed"),
-                    rs.getInt("score"),
-                    rs.getString("password"));
+            User user = null;
+            while (rs.next()) {
+                user = new User(rs.getInt("id"),
+                        rs.getString("pseudo"),
+                        rs.getString("email"),
+                        rs.getInt("gamePlayed"),
+                        rs.getInt("score"),
+                        rs.getString("password"));
+            }
+            System.out.println(user);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package fr.epsi.b3.bdd;
+package fr.epsi.b3.utils;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;

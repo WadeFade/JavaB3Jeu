@@ -1,7 +1,9 @@
 package fr.epsi.b3.controller;
 
-import fr.epsi.b3.bdd.DataSourcePgSQL;
-import fr.epsi.b3.bdd.users.CrudUsers;
+import fr.epsi.b3.model.User;
+import fr.epsi.b3.utils.DataSourcePgSQL;
+import fr.epsi.b3.bdd.users.UserDao;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -20,25 +22,28 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         DataSourcePgSQL.initializationConnection(this.dataSource);
-
+        req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        DataSourcePgSQL.initializationConnection(this.dataSource);
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (Objects.equals(Objects.requireNonNull(CrudUsers.getUserByEmail(email)).getPassword(), password)) {
-            req.getSession().setAttribute("user", Objects.requireNonNull(CrudUsers.getUserByEmail(email)).getId());
-            System.out.println("ID : " + req.getSession().getAttribute("user"));
-            System.out.println(req.getContextPath() + "/accueil");
-//            req.getRequestDispatcher(req.getContextPath() + "/accueil").forward(req, resp);
-            resp.sendRedirect(req.getContextPath() + "/accueil");
-        } else {
-            System.out.println("mauvais email/mdp");
+        User user = UserDao.getUserByEmail(email);
+        if (user != null) {
+            if (BCrypt.checkpw(password, user.getPassword())) {
+                req.getSession().setAttribute("user", user.getId());
+//                req.getRequestDispatcher("/accueil").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/views/accueil.jsp").forward(req, resp);
+//                resp.sendRedirect(req.getContextPath() + "/accueil");
+//                resp.sendRedirect("accueil");
+            }
         }
+        // error
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

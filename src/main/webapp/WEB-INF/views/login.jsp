@@ -14,7 +14,6 @@
     } catch (e) {
     }</script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" defer></script>
-    <script src="<%= request.getContextPath()%>/js/index.js" defer></script>
     <script src="<%= request.getContextPath()%>/js/errors.js" defer></script>
     <script src="<%= request.getContextPath()%>/js/error_auth.js" defer></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css">
@@ -50,7 +49,7 @@
         <h2 class="text-5xl font-black lg:p-10">Polish Brain'z</h2>
     </div>
 
-    <form method="POST" action="/JavaB3Jeu/login" class="text-blue-300 flex flex-col justify-center items-center h-full w-96">
+    <form method="POST" action="/JavaB3Jeu/login" class="flex flex-col justify-center items-center w-96 h-full text-blue-300">
         <fieldset>
             <div class="flex relative flex-col my-10">
                 <label for="email" class="text-xs">Email</label>
@@ -72,8 +71,8 @@
                 </span>
             </div>
         </fieldset>
-        <div class="form-buttons w-full flex justify-between flex-row-reverse">
-            <button type="submit" class="bg-blue-300 px-10 py-5 rounded-lg text-gray-800 text-sm">
+        <div class="flex flex-row-reverse justify-between w-full form-buttons">
+            <button id="button-form" type="submit" disabled class="px-10 py-5 text-sm text-gray-800 bg-blue-300 rounded-lg opacity-40">
                 Se connecter
             </button>
             <a type="button" class="px-10 py-5 text-sm text-blue-300 rounded-lg border border-blue-300"

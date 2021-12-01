@@ -14,7 +14,5 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println(req.getSession().getAttribute("user"));
         req.getRequestDispatcher("/WEB-INF/views/accueil.jsp").forward(req, resp);
-        resp.setCharacterEncoding("UTF-8");
-
     }
 }

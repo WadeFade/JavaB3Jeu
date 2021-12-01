@@ -16,6 +16,11 @@
     <script src="<%= request.getContextPath()%>/js/index.js" defer></script>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/css/firefly.css"/>
+    <script>
+        if (window.location.href.match(/login$/g)) {
+            window.location.href = window.location.href.replace("login","accueil");
+        }
+    </script>
 </head>
 
 <body class="relative text-gray-50 bg-gray-900">
