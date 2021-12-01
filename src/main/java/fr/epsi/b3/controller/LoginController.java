@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebServlet(urlPatterns = "/")
+@WebServlet(urlPatterns = "/login")
 public class LoginController extends HttpServlet {
     @Resource(name = "PostgreSQL Database")
     private DataSource dataSource;
