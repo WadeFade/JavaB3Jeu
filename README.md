@@ -2,7 +2,7 @@
 ![img_5.png](img_5.png)
 ### Aperçu visuel (sans avoir besoin d'installer et lancer le projet)
 --> voir le fichier Polish Brain'z App !  
---> lien youtube directement -> https://youtu.be/f0HBUGI-c4U
+--> lien youtube directement -> https://youtu.be/f0HBUGI-c4U  
 --> lien de la maquette -> https://xd.adobe.com/view/480f5d45-c923-4ecf-82ed-79e48b894d57-1d5c/
 
 # Install
