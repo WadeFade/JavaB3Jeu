@@ -1,5 +1,1 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
+<%-- Si ce fichier n'est pas présent les ressources ne fonctionnes pas (vraiment) --%>

@@ -1,22 +1,34 @@
-
-form .form-icons {
-	text-align: center;
+* {
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+	transition: filter ease-in-out .2s;
+	font-family: hero-new, sans-serif;
 }
 
-form .form-icons h4 {
-	margin-bottom: 1rem;
+body {
+	box-sizing: border-box;
+	display: inline-block;
+	width: 100vw;
+	max-width: 100vw;
+	clear: both;
+	overflow-x: hidden
 }
 
-form .form-icons .input-group-label {
-	background-color: #1779ba;
-	border-color: #1779ba;
+nav a {
+	text-decoration: none
 }
 
-form .form-icons .input-group-field {
-	border-color: #1779ba;
+html {
+	scroll-behavior: smooth
 }
 
-form .form-icons .fa {
-	color: white;
-	width: 1rem;
+h1, h1 *, h2, h3, h4, h5, h6, nav * {
+	font-family: chennai, sans-serif;
+	font-weight: 400;
+}
+
+a:focus, a:hover, button:focus, button:hover {
+	filter: saturate(120%) brightness(120%);
+	transition: all ease-in-out .2s
 }

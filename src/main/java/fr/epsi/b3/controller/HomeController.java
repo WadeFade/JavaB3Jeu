@@ -9,8 +9,10 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/accueil")
 public class HomeController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(req.getSession().getAttribute("user"));
         req.getRequestDispatcher("/WEB-INF/views/accueil.jsp").forward(req, resp);
     }
 }
