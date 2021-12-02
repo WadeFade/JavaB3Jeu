@@ -63,7 +63,6 @@
             <div class="flex relative flex-col my-10">
                 <label for="pseudo" class="text-xs">Pseudo</label>
                 <input name="pseudo" placeholder="..."
-                       oninput="this.value = this.value.toLowerCase()"
                        type="text" id="pseudo"
                        class="px-2 py-6 my-2 w-96 text-sm bg-black bg-opacity-30 rounded-lg border border-blue-300 shadow-2xl md:px-8">
                 <span id="error_pseudo" class="hidden absolute left-0 -bottom-3 mt-5 text-xs text-red-400">

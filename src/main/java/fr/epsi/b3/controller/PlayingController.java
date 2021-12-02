@@ -20,7 +20,7 @@ public class PlayingController extends HttpServlet {
 
 
         HttpSession session = req.getSession();
-        int resultatJoueur = Integer.parseInt(String.valueOf(req.getParameter("response") == null || req.getParameter("response").equals("") ? 0 : req.getParameter("response")));
+        int resultatJoueur = Integer.parseInt(String.valueOf(req.getParameter("reponsePrecedente") == null || req.getParameter("reponsePrecedente").equals("") ? 0 : req.getParameter("reponsePrecedente")));
 
         int step = Integer.parseInt(String.valueOf(session.getAttribute("step") == null ? -1 : session.getAttribute("step")));
         if (step == 10) {

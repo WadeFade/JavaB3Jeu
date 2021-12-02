@@ -119,10 +119,10 @@
             <h2 class="py-14 text-6xl font-bold text-blue-300"><%= request.getAttribute("expression") %>
             </h2>
             <div class="flex relative flex-col my-10">
-                <label for="response" class="text-xs uppercase">Réponse</label>
+                <label for="reponsePrecedente" class="text-xs uppercase">Réponse</label>
                 <div class="flex flex-row">
-                    <input name="response" placeholder="..."
-                           type="number" id="response"
+                    <input name="reponsePrecedente" placeholder=""
+                           type="number" id="reponsePrecedente"
                            class="px-2 py-6 my-2 w-96 text-sm bg-black bg-opacity-20 rounded-lg border border-blue-300 shadow-2xl md:px-8">
                     <div class="flex justify-center items-center ml-8">
                         <button>
@@ -160,5 +160,9 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById("reponsePrecedente").focus();
+    document.getElementById("reponsePrecedente").select();
+</script>
 </body>
 </html>
